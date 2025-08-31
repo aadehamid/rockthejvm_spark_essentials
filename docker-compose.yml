@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      - "TZ=Europe/Amsterdam"
+      - "TZ=America/Chicago"
       - "POSTGRES_USER=docker"
       - "POSTGRES_PASSWORD=docker"
     ports:
