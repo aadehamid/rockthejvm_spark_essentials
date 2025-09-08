@@ -11,7 +11,7 @@ This is the official repository for the Rock the JVM Spark Essentials with Scala
 ### Prerequisites
 - Install [Docker](https://docker.com) and Docker Compose
 - Java Development Kit (JDK) 11 or higher
-- SBT (Scala Build Tool)
+- SBT (Scala Build Tool) 1.9.6
 - IntelliJ IDEA (recommended)
 
 ### Initial Setup Commands
@@ -95,11 +95,28 @@ docker exec -it postgres psql -U docker -d rtjvm
 docker compose down
 ```
 
+### Convenience Scripts
+```bash
+# Quick PostgreSQL connection with helpful commands (Linux/Mac)
+./psql.sh
+
+# Quick PostgreSQL connection (Windows)
+./psql.bat
+
+# Clean all Docker containers (Linux/Mac)
+./docker-clean.sh
+
+# Clean all Docker containers (Windows)
+./docker-clean.bat
+```
+
 ### Spark Cluster Management
 ```bash
 # Build Spark cluster images (one-time setup)
 cd spark-cluster
-./build-images.sh  # or build-images.bat on Windows
+./build-images.sh  # Linux/Mac
+# OR
+./build-images.bat  # Windows
 
 # Start cluster with 3 workers
 docker compose up --scale spark-worker=3
@@ -277,6 +294,47 @@ git checkout start
 # View completed solutions
 git checkout master    # or 'udemy' for Udemy version
 ```
+
+## Quick Reference
+
+### Most Common Commands
+```bash
+# Project setup
+sbt update                    # Download dependencies
+sbt compile                   # Compile project
+sbt console                   # Start Scala REPL
+
+# Running applications
+sbt "runMain playground.Playground"              # Experimentation
+sbt "runMain part2dataframes.DataFramesBasics"   # DataFrame basics
+sbt "runMain part7bigdata.TaxiApplication"       # Big data example
+
+# Infrastructure
+docker compose up                                # Start PostgreSQL
+cd spark-cluster && docker compose up --scale spark-worker=3  # Start Spark cluster
+docker compose down                              # Stop services
+./psql.sh                                       # Connect to PostgreSQL (Linux/Mac)
+./docker-clean.sh                               # Clean all containers (Linux/Mac)
+
+# URLs
+# http://localhost:9090   - Spark Master UI
+# http://localhost:4040   - Spark Application UI (when running)
+```
+
+## Available Datasets
+
+| File | Format | Description | Typical Usage |
+|------|--------|-------------|---------------|
+| `cars.json` | JSON | Car data with make, model, year | DataFrame basics, schema inference |
+| `more_cars.json` | JSON | Additional car data | Joins, unions |
+| `movies.json` | JSON | Movie ratings and metadata | Aggregations, SQL queries |
+| `bands.json` | JSON | Music band information | DataFrames exercises |
+| `guitars.json` | JSON | Guitar catalog | Joins with guitarPlayers |
+| `guitarPlayers.json` | JSON | Guitar player profiles | Complex joins |
+| `population.json` | JSON | Population statistics | Aggregations, analytics |
+| `yellow_taxi_jan_25_2018/*.parquet` | Parquet | NYC taxi trip data | Big data processing, performance |
+
+*All datasets located in `src/main/resources/data/`*
 
 ## Important Notes
 
