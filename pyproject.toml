@@ -1,0 +1,15 @@
+[project]
+name = "rockthejvm-spark-essentials"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyspark[sql]>=4.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "rich>=14.2.0",
+    "ruff>=0.14.6",
+]
